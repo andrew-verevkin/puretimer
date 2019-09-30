@@ -4,7 +4,7 @@
 <style type="text/css">
     :root {
         --c706k1: #5dfffa;
-        --c706k2: rgb(2, 33, 30);
+        --c706k2: rgb(1, 21, 19);
     } .c1 {color: #32f09e
       }  .c3 {color:#fe6161}  .c706k1 {color: var(--c706k1);}
     .root {
@@ -100,7 +100,7 @@
         function timer() {
             if (play == true) {seconds++;}
             if (seconds >= 60) {seconds = 0; minutes++; if (minutes >= 60) {minutes = 0; hours++;}}
-            var r = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+            var r = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
             $('.timer-hms').text(r);
             // console.log($(.))
             $(document).prop('title', r);
