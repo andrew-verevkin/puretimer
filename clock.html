@@ -5,66 +5,39 @@
     :root {
         --c706k1: #5dfffa;
         --c706k2: rgb(2, 33, 30);
-    }
-    /*@font-face {font-family: 'digital7mono'; src: url('digital7mono.ttf');}  html {font-family: digital7mono;}*/
-    /*@font-face {font-family: 'RenegadeMaster'; src: url('RenegadeMaster.ttf');} html {font-family: RenegadeMaster;}*/
-    @font-face {font-family: 'digital7mono'; src: url('digital7mono.ttf');} html {font-family: digital7mono;}
-    html {
-        background: #000000;
-        color: #FFFFFF;
-    }
-    .pause {
-        animation:pause 1s infinite steps(1,end);
-    }
+    } .c1 {color:#eff09c} .c3 {color:#fe6161} .c706k1 {color: var(--c706k1);}
+    @font-face {font-family: 'd7'; src: url('d7.ttf');}
     @keyframes pause { 0% {opacity:1;} 50% {opacity:0.1;} 100% {opacity:1;} }
+    html {font-family: d7; background: #000000; color: #FFFFFF; }
+    body {display:flex; height:100%; margin:0; padding:0; justify-content:center; align-items:center;}
+    .pause {animation:pause 1s infinite steps(1,end);}
     .num {padding:5% 0; width: 100%;}
-    .c1 {color:#eff09c} .c2 {color:#49dbff} .c3 {color:#fe6161}
-    .c4 {color:#49ffb0} .c5 {color:#eff09c} .c6 {color:#5cf76e}
-    .c706k1 {color: var(--c706k1);}
-
     .frames {display: inline;}
     .off {display: none;}
     .frames {opacity: 0.7}
     .large {font-size: 26vw}
     .xlarge {font-size: 50vw}
-
     .colon-hm:after, .colon-ms:after {content: ":"}
     .dot:after {content: "."}
-    .dot.xlarge {
-        letter-spacing: 0vw;
-        font-size: 1em;
-        font-family: sans-serif;
-    }
-
+    .dot.xlarge {letter-spacing: 0vw; font-size: 1em;font-family: sans-serif;}
     .clock-h, .clock-m, .clock-s {position: relative}
-    .clock-h:before, .clock-m:before, .clock-s:before,
-    .clock-h:after, .clock-m:after, .clock-s:after {
-        position: absolute;
-        left: 0; bottom: 0;
-        display: flex;
-        z-index: -1;
-        color: var(--c706k2);
-    }
-    .clock-h:before, .clock-m:before, .clock-s:before {
-        /*content: "++";*/
-    }
-    .clock-h:after, .clock-m:after, .clock-s:after {
-        content: "88";
-    }
-
+    .clock-h:before, .clock-m:before, .clock-s:before, .clock-h:after, .clock-m:after, .clock-s:after {
+        position: absolute; left: 0; bottom: 0; display: flex; z-index: -1; color: var(--c706k2); }
+    .clock-h:after, .clock-m:after, .clock-s:after { content: "88"; }
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 </head>
 
-<body style="display:flex; height:100%; margin:0; padding:0; justify-content:center; align-items:center">
+<body>
 
 <div style="font-size: 15vw;">
     <div id="timer" class="num large pause off c3">
         <span class="timer-hms">00:00:00</span><span class="frames off">:00</span>
     </div>
     <div id="clock" class="num large c706k1">
-            <!--<span class="clock-hm">00<span class="colon">:</span>00</span><span class="clock-s">:00</span><span class="frames off">:00</span>-->
-            <span class="clock-h">00</span><span class="colon-hm"></span><span class="clock-m">00</span><span class="colon-ms"></span><span class="clock-s">00</span><span class="colon-sf off">:</span><span class="clock-f off">00</span>
+        <span class="clock-h">00</span><span class="colon-hm"></span><span class="clock-m
+        ">00</span><span class="colon-ms"></span><span class="clock-s">00</span><span class="
+        colon-sf off">:</span><span class="clock-f off">00</span>
     </div>
 </div>
 
@@ -73,7 +46,7 @@
 
     $(function () {
 
-        var cframes = 0, frames = 0, seconds = 0, minutes = 0, hours = 0, t, play = false, frames = false, play_frames = false;
+        var cframes = 0, seconds = 0, minutes = 0, hours = 0, play = false, frames = false, play_frames = false;
 
         $(document).keydown(function(eventObject){
             if ( eventObject.which == 27 ) {  // esc
@@ -85,42 +58,27 @@
                 $('.frames').toggleClass('off');
             };
             if ( eventObject.which ==  190) { // >
-                $('#timer').addClass('large');
-                $('#clock').addClass('large');
+                $('#timer, #clock').addClass('large');
             };
             if ( eventObject.which ==  188) { // <
-                $('#timer').removeClass('large');
-                $('#clock').removeClass('large');
-                //console.log();
-            };
-            if ( eventObject.which == 70 ) { // F
-                openFullscreen();
+                $('#timer, #clock').removeClass('large');
             };
             if ( eventObject.which == 32 ) { //space
-                play = !play;
-                play_frames = !play_frames;
+                play = !play; play_frames = !play_frames;
                 $('#timer').toggleClass('pause c1 c3');
             };
             if ( eventObject.which == 67 ) { // C
                 $('#clock, #timer').toggleClass('off');
             };
-            if ( eventObject.which == 83 ) {  // S
+            if ( eventObject.which == 49 ) {  // A
                 document.documentElement.requestFullscreen();
+            }
+            if ( eventObject.which == 83 ) {  // S
                 $('#clock span').toggleClass('xlarge');
                 $('.colon-hm').toggleClass('pause');
                 $('.colon-hm').toggleClass('dot');
-                $('.colon-ms').toggleClass('off');
-                $('.clock-s').toggleClass('off');
-
+                $('.colon-ms, .clock-s').toggleClass('off');
             };
-
-            if ( eventObject.which ==  74) { // J
-                // seconds = seconds-60;
-            };
-            if ( eventObject.which ==  76) { // L
-
-            };
-
         });
 
         function clock() {
@@ -128,52 +86,32 @@
             h = (10 > d.getHours() ? "0" : "") + d.getHours();
             m = (10 > d.getMinutes() ? "0" : "") + d.getMinutes();
             s = (10 > d.getSeconds() ? "0" : "") + d.getSeconds();
-            // f = (10 > d.getMilliseconds()/40 ? "0" : "") + d.getMilliseconds()/40;
-            // $('.clock-hm').text(hm);
             $('.clock-h').text(h);
             $('.clock-m').text(m);
             $('.clock-s').text(s);
-            // $('.clock-f').text(f);
-            // console.log(f);
             setTimeout(clock, 1000);
-        }
+        }clock();
         function timer() {
-
             if (play == true) {seconds++;}
             if (seconds >= 60) {seconds = 0; minutes++; if (minutes >= 60) {minutes = 0; hours++;}}
             var r = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
             $('.timer-hms').text(r);
+            // console.log($(.))
             $(document).prop('title', r);
             setTimeout(timer, 1000);
-        }
+        }timer();
         function frame() {
             if (play_frames == true) {
-                frames++;
-                if (frames >= 25) {frames = 0;}
-                var fv = 0;
-                if (frames > 9) {
-                    fv = frames;
-                }  else {
-                    fv = "0"+frames;
-                } fv = ":"+fv;
+                frames++; if (frames >= 25) {frames = 0;}
+                var fv = 0; if (frames > 9) { fv = frames; }  else { fv = "0"+frames; } fv = ":"+fv;
                 $('#timer .frames').text(fv);
-            }
-            cframes++;
+            } cframes++;
             if (cframes >= 25) {cframes = 0;}
             var cfv = 0;
-            if (cframes > 9) {
-                cfv = cframes;
-            }  else {
-                cfv = "0"+cframes;
-            } cfv = ":"+cfv;
+            if (cframes > 9) { cfv = cframes; }  else { cfv = "0"+cframes; } cfv = ":"+cfv;
             $('#clock .frames').text(cfv);
-
             setTimeout(frame, 1000/25);
-        }
-
-        clock();
-        timer();
-        frame();
+        }frame();
     });
 </script>
 </body>
