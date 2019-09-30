@@ -3,8 +3,8 @@
 <title>Timer</title>
 <style type="text/css">
     :root {
-        --c706k1: #1cffd0;
-        --c706k2: rgba(2, 26, 23, 0.84);
+        --c706k1: #5dfffa;
+        --c706k2: rgb(2, 33, 30);
     }
     /*@font-face {font-family: 'digital7mono'; src: url('digital7mono.ttf');}  html {font-family: digital7mono;}*/
     /*@font-face {font-family: 'RenegadeMaster'; src: url('RenegadeMaster.ttf');} html {font-family: RenegadeMaster;}*/
@@ -25,11 +25,16 @@
     .frames {display: inline;}
     .off {display: none;}
     .frames {opacity: 0.7}
-    .large {font-size: 19vw}
-    .xlarge {font-size: 40vw}
+    .large {font-size: 26vw}
+    .xlarge {font-size: 50vw}
 
     .colon-hm:after, .colon-ms:after {content: ":"}
     .dot:after {content: "."}
+    .dot.xlarge {
+        letter-spacing: 0vw;
+        font-size: 1em;
+        font-family: sans-serif;
+    }
 
     .clock-h, .clock-m, .clock-s {position: relative}
     .clock-h:before, .clock-m:before, .clock-s:before,
@@ -75,7 +80,7 @@
                 frames = 0; seconds = 0; minutes = 0; hours = 0;
                 $('.frames').text(":00");
             };
-            if ( eventObject.which == 70 ) { // F
+            if ( eventObject.which == 191 ) { // /?
                 frames = !frames;
                 $('.frames').toggleClass('off');
             };
@@ -88,9 +93,9 @@
                 $('#clock').removeClass('large');
                 //console.log();
             };
-            /*if ( eventObject.which == 84 ) { // T
-                $('#timer').toggleClass('off');
-            };*/
+            if ( eventObject.which == 70 ) { // F
+                openFullscreen();
+            };
             if ( eventObject.which == 32 ) { //space
                 play = !play;
                 play_frames = !play_frames;
@@ -100,18 +105,20 @@
                 $('#clock, #timer').toggleClass('off');
             };
             if ( eventObject.which == 83 ) {  // S
+                document.documentElement.requestFullscreen();
                 $('#clock span').toggleClass('xlarge');
                 $('.colon-hm').toggleClass('pause');
                 $('.colon-hm').toggleClass('dot');
                 $('.colon-ms').toggleClass('off');
                 $('.clock-s').toggleClass('off');
+
             };
 
             if ( eventObject.which ==  74) { // J
-                seconds = seconds-60;
+                // seconds = seconds-60;
             };
             if ( eventObject.which ==  76) { // L
-                seconds = seconds+60;
+
             };
 
         });
@@ -163,6 +170,7 @@
 
             setTimeout(frame, 1000/25);
         }
+
         clock();
         timer();
         frame();
